@@ -1,0 +1,5 @@
+inventory-title: '{player_name}''s Portable Inventory'
+storage-command-aliases:
+  - 'storage'
+  - 'mystorage'
+  - 'backpack'

@@ -1,0 +1,6 @@
+name: MyStorage
+version: '${project.version}'
+main: com.parpar8090.mystorage.MyStoragePlugin
+api-version: 1.18
+authors: [ parpar8090 ]
+description: access your personal storage accessible from anywhere using a command

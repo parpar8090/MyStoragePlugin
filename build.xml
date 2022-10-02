@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<project name="MyStorage" default="Build">
+    <condition property="serverPath" value="C:\Minecraft Servers\Testing\1.18.2">
+        <os family="windows"/>
+    </condition>
+
+    <xmlproperty file="pom.xml" prefix="pom" keeproot="false"/>
+
+    <target name="Build">
+        <jar jarfile="${serverPath}\plugins\${ant.project.name}.jar" basedir="./target/classes/" includes="**/*"/>
+    </target>
+
+</project>
