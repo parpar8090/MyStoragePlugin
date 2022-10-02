@@ -1,5 +1,6 @@
 package com.parpar8090.mystorage;
 
+import com.parpar8090.mystorage.commands.MyStorageCommand;
 import com.parpar8090.mystorage.settings.Settings;
 import com.parpar8090.mystorage.sqlite.InventoryDB;
 import lombok.Getter;
@@ -48,7 +49,6 @@ public final class MyStoragePlugin extends JavaPlugin implements Listener {
             CommandMap map = (CommandMap) commandMap.get(Bukkit.getServer());
 
             map.register(Settings.STORAGE_COMMAND_ALIASES.get(0), new MyStorageCommand());
-            //new PartyCommand().register(map);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,12 +58,20 @@ public final class MyStoragePlugin extends JavaPlugin implements Listener {
     public void onDisable() {
         // Plugin shutdown logic
         Bukkit.getLogger().info("Disabling MyStorage plugin!");
+        inventoryDB.close();
     }
 
     public void openStorage(Player player){
         PersonalInventory inv = inventoryDB.cachedInventories.get(player.getUniqueId());
         if(inv == null) return;
         inv.open(player);
+    }
+
+    @Deprecated
+    public void viewStorage(String playerName, Player viewer){
+        PersonalInventory inv = inventoryDB.cachedInventories.get(Bukkit.getOfflinePlayer(playerName).getUniqueId());
+        if(inv == null) return;
+        inv.open(viewer);
     }
 
     @EventHandler

@@ -6,14 +6,12 @@ import java.io.File;
 import java.sql.*;
 
 public class SQLiteConnection {
-    private final File folder;
-    private final File file;
     private final String url;
     private Connection conn = null;
     public SQLiteConnection(String fileName){
-        folder = MyStoragePlugin.getInstance().getDataFolder();
-        file = new File(folder, fileName);
-        url = "jdbc:sqlite:"+file.getAbsolutePath();
+        File folder = MyStoragePlugin.getInstance().getDataFolder();
+        File file = new File(folder, fileName);
+        url = "jdbc:sqlite:"+ file.getAbsolutePath();
 
         load();
     }
@@ -35,6 +33,7 @@ public class SQLiteConnection {
         }
     }
 
+    @Deprecated
     public void executeSql(String sql, Object[] values, SQLType[] valueTypes){
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             int i = 0;
@@ -77,6 +76,7 @@ public class SQLiteConnection {
         }
     }
 
+    @Deprecated
     public void createTableIfNotExists(String table, String[] columns){
         String sql = "CREATE TABLE IF NOT EXISTS `"+table+"` (" + String.join(",\n", columns)+");";
         executeSql(sql);
@@ -93,6 +93,7 @@ public class SQLiteConnection {
      * @param columns the columnts
      * @param values the values in place of the columns. Each value must contain brackets "(" ")" at the beggining and end.
      */
+    @Deprecated
     public void insertOrUpdate(String table, String[] columns, String[] values, String[] updateColumns, String[] updateValues){
         StringBuilder updateColumnsValues = new StringBuilder();
         for (int i = 0; i < updateColumns.length; i++) {
@@ -107,12 +108,14 @@ public class SQLiteConnection {
         executeUpdate(sql);
     }
 
+    @Deprecated
     public ResultSet selectAllWithCondition(String table, String sqlCondition){
         String query = "SELECT * FROM `"+table+"` WHERE "+sqlCondition+";";
         System.out.println(query);
         return executeQuery(query);
     }
 
+    @Deprecated
     public int updateAllWithCondition(String table, String sqlCondition, String[] columns, String[] values){
         if(columns.length != values.length){
             throw new IllegalArgumentException("Not all columns have a value");
