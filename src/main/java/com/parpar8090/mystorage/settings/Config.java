@@ -65,13 +65,16 @@ public abstract class Config {
             config.setDefaults(defaultConfig);
         }
 
-        config.options().copyHeader(true).copyDefaults(true);
+        config.options().parseComments(true).copyDefaults(true);
 
         saveConfig();
 
         onLoad();
     }
 
+    /**
+     * on config loaded
+     */
     public void onLoad() {
     }
 

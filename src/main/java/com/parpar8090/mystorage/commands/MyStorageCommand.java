@@ -1,5 +1,6 @@
-package com.parpar8090.mystorage;
+package com.parpar8090.mystorage.commands;
 
+import com.parpar8090.mystorage.MyStoragePlugin;
 import com.parpar8090.mystorage.settings.Settings;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -8,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MyStorageCommand extends Command {
-    protected MyStorageCommand() {
+    public MyStorageCommand() {
         super(Settings.STORAGE_COMMAND_ALIASES.get(0));
         setAliases(Settings.STORAGE_COMMAND_ALIASES);
     }

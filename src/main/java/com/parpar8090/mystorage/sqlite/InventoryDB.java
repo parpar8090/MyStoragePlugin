@@ -21,6 +21,10 @@ public class InventoryDB {
         db.executeSql(sql);
     }
 
+    public void close(){
+        db.close();
+    }
+
     public void saveInventory(HumanEntity player, PersonalInventory inventory){
         db.deleteWithCondition("inventories", "`uuid` = '"+player.getUniqueId()+"'");
         ArrayList<String> items = new ArrayList<>();
